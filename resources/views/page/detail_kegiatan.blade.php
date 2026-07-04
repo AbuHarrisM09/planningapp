@@ -247,8 +247,7 @@
                     @endif
                 </h5>
             </div>
-
-            @if(auth()->check() && auth()->user()->level === 1)
+            @can('superadmin')
                 <div class="d-flex justify-content-center gap-3">
                     <form action="/detail-rencana-kegiatan/{{$keg->idkegiatan}}/status" method="POST" class="mx-2 d-inline-block">
                         @csrf
@@ -265,7 +264,7 @@
                         </button>
                     </form>
                 </div>
-            @endif
+            @endcan
             @endforeach
         </div>
 
