@@ -14,11 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('iduser');
-            $table->string('nama');
-            $table->string('username')->unique();
+            $table->increments('idpegawai');
+            $table->string('nip')->unique();
+            $table->string('namapegawai');
+            $table->string('email')->unique();
             $table->string('password');
-            $table->string('level');
+            $table->integer('level');
+            $table->date('tgllahir')->nullable();
+            $table->unsignedInteger('idpangkat')->nullable();
+            $table->unsignedInteger('idjabatan')->nullable();
+            $table->date('periodeawal')->nullable();
+            $table->date('periodeakhir')->nullable();
+            $table->string('statusaktif')->default('aktif');
+            $table->unsignedInteger('idunit')->nullable();
             $table->timestamps();
         });
     }
