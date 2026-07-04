@@ -31,10 +31,10 @@
         var e =
             (window.innerHeight > 0 ? window.innerHeight : this.screen.height) -
             5;
-        (e -= 67) < 1 && (e = 1),
-            e > 67 && $(".main-content").css("min-height", e + "px");
+        ((e -= 67) < 1 && (e = 1),
+            e > 67 && $(".main-content").css("min-height", e + "px"));
     };
-    $(window).ready(e), $(window).on("resize", e);
+    ($(window).ready(e), $(window).on("resize", e));
 
     /*================================
     sidebar menu
@@ -100,12 +100,12 @@
                             }
                             form.classList.add("was-validated");
                         },
-                        false
+                        false,
                     );
-                }
+                },
             );
         },
-        false
+        false,
     );
 
     /*================================
@@ -266,7 +266,7 @@ $(".form-group").on("input", ".pnt", function () {
             total += parseFloat(inputVal);
         }
     });
-    document.getElementById("result").value=total;
+    document.getElementById("result").value = total;
 });
 
 //totalorang
@@ -278,10 +278,10 @@ $(".form-group").on("input", ".ttl", function () {
             total += parseFloat(inputVal);
         }
     });
-    document.getElementById("ttlorg").value=total;
-    document.getElementById("ttlapd").value=total;
-    document.getElementById("ttlperlengkapan").value=total;
-    document.getElementById("ttlkonsumsi").value=total;
+    document.getElementById("ttlorg").value = total;
+    document.getElementById("ttlapd").value = total;
+    document.getElementById("ttlperlengkapan").value = total;
+    document.getElementById("ttlkonsumsi").value = total;
 });
 
 //totalorang
@@ -293,7 +293,7 @@ $(".form-group").on("input", ".srt", function () {
             total += parseFloat(inputVal);
         }
     });
-    document.getElementById("sertifikat").value=total;
+    document.getElementById("sertifikat").value = total;
 });
 
 $(document).ready(function () {
@@ -433,12 +433,19 @@ function cal() {
         var tanggal = hari + ", " + tanggal + " " + bulan + " " + tahun;
 
         outputHTML +=
-            "<tr><td rowspan=4>" +
+            "<tr><td>" +
             s +
-            "<td rowspan=4>" +
+            "</td><td>" +
             tanggal +
-            "<td><input type=text><td><input type=time><td><input type=time><td><input type=text><td><input type=text><td><input type=text>" +
-            "</td></td></td></td></td></td>" +
+            "<input type='hidden' name='matrix_tanggal[]' value='" +
+            tanggal +
+            "'>" +
+            "</td><td><input type='time' class='form-control border border-dark' style='color:black;' name='matrix_waktumulai[]'>" +
+            "</td><td><input type='time' class='form-control border border-dark' style='color:black;' name='matrix_waktuselesai[]'>" +
+            "</td><td><input type='text' class='form-control border border-dark' style='color:black;' name='matrix_agenda[]'>" +
+            "</td><td><input type='text' class='form-control border border-dark' style='color:black;' name='matrix_pic[]'>" +
+            "</td><td><input type='text' class='form-control border border-dark' style='color:black;' name='matrix_jamperjp[]'>" +
+            "</td><td><input type='text' class='form-control border border-dark' style='color:black;' name='matrix_lokasi[]'>" +
             "</td></tr>";
         outputHTML2 +=
             "<div class='row col-sm-12 pt-1'><p class='col-sm-4'>&nbsp;&nbsp;</p><div class='row col-sm-8'><div class='col-sm-2 pt-1'>" +
@@ -454,10 +461,10 @@ function cal() {
 
 //fungsi fullday fullmeeting
 function check(val) {
-    if(val==1) {
-        document.getElementById("fullboardstyle").style.display="none";
+    if (val == 1) {
+        document.getElementById("fullboardstyle").style.display = "none";
     }
-    if(val==2) {
-        document.getElementById("fullboardstyle").style.display="";
+    if (val == 2) {
+        document.getElementById("fullboardstyle").style.display = "";
     }
 }

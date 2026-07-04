@@ -228,10 +228,45 @@
                     </table>
                 </div>
             </div>
-            <div class="d-flex justify-content-around">
-                <button type="button" class="btn btn-rounded btn-danger mb-3">Tolak Kegiatan</button>
-                <button type="button" class="btn btn-rounded btn-success mb-3">ACC Kegiatan</button>
+
+            @if(session('success'))
+                <div class="alert alert-success text-center my-3">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @foreach ($kegiatan as $keg)
+            <div class="card p-3 my-3 text-center border-0 bg-light">
+                <h5>Status Validasi Saat Ini:
+                    @if($keg->status == 'menunggu')
+                        <span class="badge badge-warning text-dark p-2">Menunggu</span>
+                    @elseif($keg->status == 'diterima')
+                        <span class="badge badge-success p-2">Diterima</span>
+                    @else
+                        <span class="badge badge-danger p-2">Ditolak</span>
+                    @endif
+                </h5>
             </div>
+
+            @if(auth()->check() && auth()->user()->level === 1)
+                <div class="d-flex justify-content-center gap-3">
+                    <form action="/detail-rencana-kegiatan/{{$keg->idkegiatan}}/status" method="POST" class="mx-2 d-inline-block">
+                        @csrf
+                        <input type="hidden" name="status" value="ditolak">
+                        <button type="submit" class="btn btn-rounded btn-danger mb-3" onclick="return confirm('Apakah Anda yakin ingin menolak rencana kegiatan ini?')">
+                            <i class="fa fa-times"></i> Tolak Kegiatan
+                        </button>
+                    </form>
+                    <form action="/detail-rencana-kegiatan/{{$keg->idkegiatan}}/status" method="POST" class="mx-2 d-inline-block">
+                        @csrf
+                        <input type="hidden" name="status" value="diterima">
+                        <button type="submit" class="btn btn-rounded btn-success mb-3" onclick="return confirm('Apakah Anda yakin ingin menyetujui rencana kegiatan ini?')">
+                            <i class="fa fa-check"></i> ACC Kegiatan
+                        </button>
+                    </form>
+                </div>
+            @endif
+            @endforeach
         </div>
 
     </div>

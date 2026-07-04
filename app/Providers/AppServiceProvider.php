@@ -3,30 +3,30 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Enums\LevelUser;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Gate::define('superadmin', function(User $user){
-            return $user->level===1;
+        Paginator::useBootstrap();
+
+        Gate::define('superadmin', function (User $user) {
+            return $user->level === LevelUser::SuperAdmin;
         });
     }
 }

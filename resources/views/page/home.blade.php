@@ -78,6 +78,30 @@
             </div>
         </div>
     </div>
+
+    <!-- Charts Section -->
+    <div class="grid gap-6 mb-8 md:grid-cols-2">
+        <!-- Rencana Kegiatan Chart -->
+        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 border-2">
+            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300 text-center">
+                Statistik Status Rencana Kegiatan
+            </h4>
+            <div class="relative h-64" style="height: 250px;">
+                <canvas id="chartKegiatan" data-menunggu="{{$kegiatanmenunggu}}" data-diterima="{{$kegiatanditerima}}" data-ditolak="{{$kegiatanditolak}}"></canvas>
+            </div>
+        </div>
+
+        <!-- Rencana Belanja Chart -->
+        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 border-2">
+            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300 text-center">
+                Statistik Status Rencana Belanja
+            </h4>
+            <div class="relative h-64" style="height: 250px;">
+                <canvas id="chartBelanja" data-menunggu="{{$rencanabbmenunggu}}" data-diterima="{{$rencanabbditerima}}" data-ditolak="{{$rencanabbditolak}}"></canvas>
+            </div>
+        </div>
+    </div>
+
     <!-- New Table -->
     <!-- <div class="w-full overflow-hidden rounded-lg shadow-xs pb-16">
         <div class="w-full overflow-x-auto">
@@ -148,94 +172,75 @@
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     @foreach($belanja as $index=>$bel)
                     <tr class="text-gray-700 dark:text-gray-400 text-sm">
-                        <td class="px-4 py-3">{{ $index + $belanja->firstItem() }}</td>
-                        <td class="px-4 py-3">{{$bel->namakegiatanbb}}</td>
-                        <td class="px-4 py-3">Pak Agus Suratna</td>
-                        <td class="px-4 py-3">{{$bel->created_at}}</td>
-                        <td class="px-4 py-3">
-                            @if($bel->status=='menunggu')
-                            <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:bg-orange-500 dark:text-orange-100">
-                                Menunggu
-                            </span>
-                            @elseif($bel->status=='diterima')
-                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                Diterima
-                            </span>
-                            @else
-                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
-                                Ditolak
-                            </span>
-                            @endif
-                        </td>
-                        <td class="px-4 py-3">
-                            <button href="/detail-rencana-kegiatan/{{$keg->idkegiatan}}"><u>Detail</u></button> <br>
-                            <a target="_blank" href="/cetak-kegiatan/{{$keg->idkegiatan}}"><u>Cetak</u></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-            <span class="flex items-center col-span-3">
-                Showing 21-30 of 100
-            </span>
-            <span class="col-span-2"></span>
-             
-            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                <nav aria-label="Table navigation">
-                    <ul class="inline-flex items-center">
-                        <li>
-                            <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple" aria-label="Previous">
-                                <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                    <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                1
-                            </button>
-                        </li>
-                        <li>
-                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                2
-                            </button>
-                        </li>
-                        <li>
-                            <button class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                3
-                            </button>
-                        </li>
-                        <li>
-                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                4
-                            </button>
-                        </li>
-                        <li>
-                            <span class="px-3 py-1">...</span>
-                        </li>
-                        <li>
-                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                8
-                            </button>
-                        </li>
-                        <li>
-                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                9
-                            </button>
-                        </li>
-                        <li>
-                            <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next">
-                                <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                                    <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                        </li>
+... (commented code) ...
                     </ul>
                 </nav>
             </span>
         </div>
     </div> -->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Chart Kegiatan
+        var canvasKegiatan = document.getElementById('chartKegiatan');
+        var kMenunggu = parseInt(canvasKegiatan.getAttribute('data-menunggu')) || 0;
+        var kDiterima = parseInt(canvasKegiatan.getAttribute('data-diterima')) || 0;
+        var kDitolak = parseInt(canvasKegiatan.getAttribute('data-ditolak')) || 0;
+
+        var ctxKegiatan = canvasKegiatan.getContext('2d');
+        var chartKegiatan = new Chart(ctxKegiatan, {
+            type: 'pie',
+            data: {
+                labels: ['Menunggu', 'Diterima', 'Ditolak'],
+                datasets: [{
+                    data: [kMenunggu, kDiterima, kDitolak],
+                    backgroundColor: ['#ff9800', '#2bc06c', '#f44336'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: '#718096',
+                        fontSize: 12
+                    }
+                }
+            }
+        });
+
+        // Chart Belanja
+        var canvasBelanja = document.getElementById('chartBelanja');
+        var bMenunggu = parseInt(canvasBelanja.getAttribute('data-menunggu')) || 0;
+        var bDiterima = parseInt(canvasBelanja.getAttribute('data-diterima')) || 0;
+        var bDitolak = parseInt(canvasBelanja.getAttribute('data-ditolak')) || 0;
+
+        var ctxBelanja = canvasBelanja.getContext('2d');
+        var chartBelanja = new Chart(ctxBelanja, {
+            type: 'doughnut',
+            data: {
+                labels: ['Menunggu', 'Diterima', 'Ditolak'],
+                datasets: [{
+                    data: [bMenunggu, bDiterima, bDitolak],
+                    backgroundColor: ['#ff9800', '#2bc06c', '#f44336'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: '#718096',
+                        fontSize: 12
+                    }
+                }
+            }
+        });
+    });
+</script>
 @endsection

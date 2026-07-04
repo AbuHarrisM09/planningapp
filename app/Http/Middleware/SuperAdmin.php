@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\LevelUser;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class SuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!auth()->check() || auth()->user()->level!==1){
+        if (!auth()->check() || auth()->user()->level !== LevelUser::SuperAdmin) {
             abort(403);
         }
         return $next($request);

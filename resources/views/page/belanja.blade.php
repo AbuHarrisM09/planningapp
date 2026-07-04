@@ -90,8 +90,9 @@
                             @endif
                         </td>
                         <td class="px-4 py-3">
-                            <button href="/detail-rencana-belanja/{{$bel->idbelanjabarang}}"><u>Detail</u></button> <br>
-                            <a target="_blank" href="/cetak-rencana-belanja/{{$bel->idbelanjabarang}}"><u>Cetak</u></a>
+                            <a href="/detail-rencana-belanja/{{$bel->idbelanjabarang}}" class="text-purple-600"><u>Detail</u></a> <br>
+                            <a target="_blank" href="/cetak-rencana-belanja/{{$bel->idbelanjabarang}}"><u>Cetak</u></a> |
+                            <a href="/unduh-rencana-belanja/{{$bel->idbelanjabarang}}" class="text-indigo-600"><u>Unduh PDF</u></a>
                         </td>
                     </tr>
                     @endforeach

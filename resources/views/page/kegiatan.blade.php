@@ -89,8 +89,9 @@
                             @endif
                         </td>
                         <td class="px-4 py-3">
-                            <button href="/detail-rencana-kegiatan/{{$keg->idkegiatan}}"><u>Detail</u></button> <br>
-                            <a target="_blank" href="/cetak-kegiatan/{{$keg->idkegiatan}}"><u>Cetak</u></a>
+                            <a href="/detail-rencana-kegiatan/{{$keg->idkegiatan}}" class="text-purple-600"><u>Detail</u></a> <br>
+                            <a target="_blank" href="/cetak-kegiatan/{{$keg->idkegiatan}}"><u>Cetak</u></a> |
+                            <a href="/unduh-kegiatan/{{$keg->idkegiatan}}" class="text-indigo-600"><u>Unduh PDF</u></a>
                         </td>
                     </tr>
                     @endforeach
